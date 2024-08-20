@@ -2,18 +2,17 @@
 
 ## Overview
 
-This lab demonstrates the setup of a Virtual Private Cloud (VPC) on AWS, including creating subnets, configuring an internet gateway, and deploying instances with a load balancer. The lab consists of the following stages:
+This lab demonstrates how to set up a Virtual Private Cloud (VPC) on AWS, including creating subnets, configuring an internet gateway, and deploying EC2 instances with a load balancer.
 
-1. **Stage 1**: Set up a VPC with public subnets, configure internet access, and deploy instances with Nginx and a load balancer.
-2. **Stage 2**: Create private subnets that access the internet through public subnets.
+## Stages
+
+1. **Stage 1**: Set up a VPC with public subnets, configure internet access, and deploy EC2 instances with Nginx and a load balancer.
+2. **Stage 2**: Create private subnets and configure routing for internet access through public subnets.
 
 ## Prerequisites
 
-To follow this lab, you will need:
-
-- An AWS account.
+- AWS account.
 - Basic knowledge of AWS services such as VPC, EC2, and Load Balancer.
-- AWS CLI installed and configured (optional, for command-line operations).
 
 ## Installation and Setup
 
@@ -21,39 +20,38 @@ To follow this lab, you will need:
 
 #### 1. Create a VPC
 
-1. Sign in to the AWS Management Console.
-2. Navigate to the VPC Dashboard.
-3. Create a new VPC with the CIDR block `192.168.0.0/16`.
+- Open the [VPC Dashboard](https://console.aws.amazon.com/vpc/home).
+- Create a new VPC with the CIDR block `192.168.0.0/16`.
+
+  ![Create VPC](screenshots/create-vpc.png)
 
 #### 2. Create Subnets
 
-1. In the VPC Dashboard, go to the "Subnets" section.
-2. Create the first subnet with CIDR block `192.168.1.0/24`.
-3. Create the second subnet with CIDR block `192.168.2.0/24`.
+- Go to the **"Subnets"** section.
+- Create:
+  - Subnet 1: `192.168.1.0/24`
+  - Subnet 2: `192.168.2.0/24`
+
+  ![Create Subnets](screenshots/create-subnets.png)
 
 #### 3. Configure Internet Access
 
-1. Navigate to the "Internet Gateways" section in the VPC Dashboard.
-2. Create a new Internet Gateway and attach it to your VPC.
-3. Update the route table associated with your VPC to route traffic to the internet gateway.
+- Go to **"Internet Gateways"**.
+- Create and attach an Internet Gateway to your VPC.
+- Update the route table to route traffic to the Internet Gateway.
+
+  ![Attach Internet Gateway](screenshots/attach-igw.png)
+  ![Update Route Table](screenshots/update-route-table.png)
 
 #### 4. Launch EC2 Instances
 
-1. **Instance 1**:
-   - Launch an EC2 instance in the subnet `192.168.1.0/24`.
-   - Install Nginx and set up a small website.
-
-2. **Instance 2**:
-   - Launch an EC2 instance in the subnet `192.168.2.0/24`.
-   - Install Nginx and set up a small website.
-
-3. **Instance 3 (Load Balancer)**:
-   - Launch an EC2 instance in either subnet.
-   - Configure this instance as a load balancer to distribute traffic between the two Nginx instances.
+- **Instance 1**: Launch an EC2 instance in subnet `192.168.1.0/24` and install Nginx.
+- **Instance 2**: Launch an EC2 instance in subnet `192.168.2.0/24` and install Nginx.
+- **Instance 3 (Load Balancer)**: Launch an EC2 instance in either subnet and configure it as a load balancer.
 
 #### 5. Configure Nginx
 
-On each Nginx instance, you can use the following commands to install and configure Nginx:
+On each Nginx instance, run:
 
 ```bash
 # Update package lists
