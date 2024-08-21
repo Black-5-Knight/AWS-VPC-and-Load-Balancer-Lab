@@ -62,17 +62,17 @@ cd /tmp
 \# Install the SSM Agent
 sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
 
-# Enable and start the SSM Agent
+\# Enable and start the SSM Agent
 sudo systemctl enable amazon-ssm-agent
 sudo systemctl start amazon-ssm-agent
 
-# Install Nginx
+\# Install Nginx
 sudo yum install -y nginx
 
-# Create a simple HTML file
+\# Create a simple HTML file
 echo "<html><body><h1>Welcome to Instance 1 (for seond ec2 use 2)</h1></body></html>" | sudo tee /var/www/html/index.html
 
-# Start Nginx service
+\# Start Nginx service
 sudo systemctl start nginx
 
 #### 5. Configure Nginx (Instance 3 )
