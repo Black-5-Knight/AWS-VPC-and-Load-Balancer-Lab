@@ -71,7 +71,7 @@ sudo yum install -y nginx
 
 \# Create a simple HTML file
 
-echo "```<html><body> <h1> Welcome to Instance 1 (or 2) </h1></body></html>" | sudo tee /usr/share/nginx/html/index.html
+echo "```html <html><body> <h1> Welcome to Instance 1 (or 2) </h1></body></html>" | sudo tee /usr/share/nginx/html/index.html
 
 \# Start Nginx service
 sudo systemctl start nginx
@@ -79,23 +79,21 @@ sudo systemctl start nginx
 #### 5. Configure Nginx (Instance 3 )
 Once Nginx is installed, we need to configure it as a load balancer. We do this by creating a configuration file for Nginx. Create the configuration file at /etc/nginx/conf.d and name it as lb.conf. Add the following code to the configuration file:
 
-{
+```nginx
 upstream backend {
+    server <IP_ADDRESS_1>;
+    server <IP_ADDRESS_2>;
+    # add more backend servers as needed
+}
 
-        server <IP_ADDRESS_1>;
-        server <IP_ADDRESS_2>;
-        # add more backend servers as needed
-    }
+server {
+    listen 80;
+    server_name <LOAD_BALANCER_IP_ADDRESS>;
 
-    server {
-        listen 80;
-        server_name http://<LOAD_BALANCER_IP_ADDRESS>;
-
-        location / {
-            proxy_pass http://backend;
-        }
+    location / {
+        proxy_pass http://backend;
     }
-    }
+}
 #### 6.Load Balancer Overview
 
  ![Load Balancer Overview](screenshots/load-balancer-overview1.png)
