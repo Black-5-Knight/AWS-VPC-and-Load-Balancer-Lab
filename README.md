@@ -71,7 +71,7 @@ sudo yum install -y nginx
 
 \# Create a simple HTML file
 
-echo "<html><body> <h1> Welcome to Instance 1 (for second EC2 use 2) </h1></body></html>" | sudo tee /usr/share/nginx/html/index.html
+echo "<html><body> <h1> Welcome to Instance 1 (or 2) </h1></body></html>" | sudo tee /usr/share/nginx/html/index.html
 
 \# Start Nginx service
 sudo systemctl start nginx
@@ -81,6 +81,7 @@ Once Nginx is installed, we need to configure it as a load balancer. We do this 
 
 
 upstream backend {
+
         server <IP_ADDRESS_1>;
         server <IP_ADDRESS_2>;
         # add more backend servers as needed
