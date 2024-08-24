@@ -1,4 +1,5 @@
-# AWS VPC and Load Balancer Lab
+# AWS-EC2-Public-and-Private-Load-Balancer
+
 
 ## Overview
 
