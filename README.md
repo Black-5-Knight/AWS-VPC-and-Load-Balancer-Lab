@@ -78,7 +78,7 @@ echo "<html><body> <h1> Welcome to Instance 1 (or 2) </h1></body></html>" | sudo
 sudo systemctl start nginx
 ```
 #### 5. Configure Nginx (Instance 3 )
-Once Nginx is installed, we need to configure it as a load balancer. We do this by creating a configuration file for Nginx. Create the configuration file at /etc/nginx/conf.d and name it as lb.conf. Add the following code to the configuration file:
+Once Nginx is installed, we need to configure it as a load balancer. We do this by creating a configuration file for Nginx. Create the configuration file at */etc/nginx/conf.d* and name it as *lb.conf* . Add the following code to the configuration file:
 
 ```nginx
 upstream backend {
