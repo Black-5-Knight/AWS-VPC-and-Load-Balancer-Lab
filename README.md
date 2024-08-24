@@ -72,7 +72,7 @@ sudo yum install -y nginx
 
 # Create a simple HTML file
 
-echo "```html <html><body> <h1> Welcome to Instance 1 (or 2) </h1></body></html>" | sudo tee /usr/share/nginx/html/index.html
+echo "html <html><body> <h1> Welcome to Instance 1 (or 2) </h1></body></html>" | sudo tee /usr/share/nginx/html/index.html
 
 # Start Nginx service
 sudo systemctl start nginx
