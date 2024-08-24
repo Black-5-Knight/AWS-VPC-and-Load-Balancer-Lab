@@ -54,29 +54,29 @@ This lab demonstrates how to set up a Virtual Private Cloud (VPC) on AWS, includ
 
 On each Nginx instance, run:
 
-
-\#!/bin/bash
+```linux 
+#!/bin/bash
 
 \# Move to /tmp directory
 cd /tmp
 
-\# Install the SSM Agent
+# Install the SSM Agent
 sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
 
-\# Enable and start the SSM Agent
+# Enable and start the SSM Agent
 sudo systemctl enable amazon-ssm-agent
 sudo systemctl start amazon-ssm-agent
 
-\# Install Nginx
+# Install Nginx
 sudo yum install -y nginx
 
-\# Create a simple HTML file
+# Create a simple HTML file
 
 echo "```html <html><body> <h1> Welcome to Instance 1 (or 2) </h1></body></html>" | sudo tee /usr/share/nginx/html/index.html
 
-\# Start Nginx service
+# Start Nginx service
 sudo systemctl start nginx
-
+```
 #### 5. Configure Nginx (Instance 3 )
 Once Nginx is installed, we need to configure it as a load balancer. We do this by creating a configuration file for Nginx. Create the configuration file at /etc/nginx/conf.d and name it as lb.conf. Add the following code to the configuration file:
 
