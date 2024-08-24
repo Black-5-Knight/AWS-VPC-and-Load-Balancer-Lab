@@ -57,7 +57,7 @@ On each Nginx instance, run:
 ```linux 
 #!/bin/bash
 
-\# Move to /tmp directory
+# Move to /tmp directory
 cd /tmp
 
 # Install the SSM Agent
@@ -95,6 +95,7 @@ server {
         proxy_pass http://backend;
     }
 }
+```
 #### 6.Load Balancer Overview
 
  ![Load Balancer Overview](screenshots/load-balancer-overview1.png)
