@@ -100,3 +100,69 @@ server {
 
  ![Load Balancer Overview](screenshots/load-balancer-overview1.png)
  ![Load Balancer Overview](screenshots/load-balancer-overview2.png)
+
+### Stage 2: Private EC2 Instances and Load Balancing
+
+#### 1. Create Private Subnets
+
+- In the **"Subnets"** section, create two private subnets:
+  - Private Subnet 1: `192.168.3.0/24`
+  - Private Subnet 2: `192.168.4.0/24`
+#### 2. Configure Internet Access
+
+- Go to **"NAT Gateways"**.
+- Create and attach an NAT Gateway to your VPC.
+- Update the route table to route traffic to the Internet Gateway.
+  ![Resource map](screenshots/Resource-map.png)
+#### 3. Launch EC2 Instances
+
+- **Instance 1 (Public Load Balancer)**: Launch an EC2 instance in Public Subnet and configure it as a load balancer.
+- **Instance 2 ,3 (Public EC2 Instance)**: Launch an EC2 instance in Public Subnet and install Nginx.
+- **Instance 4 (Private Load Balancer)**: Launch an EC2 instance in Private Subnet and configure it as a load balancer.
+- **Instance 5,6 (Private EC2 Instance)**: Launch an EC2 instance in Private Subnet and install Nginx.
+#### 4.Configure Nginx on the public EC2 Instance 2,3
+```nginx
+upstream backend {
+    server <PRIVATE_LOAD_BALANCER_IP_ADDRESS>; 
+    # add more backend servers as needed
+}
+
+server {
+    listen 80;
+    server_name <Public_Instance_IP_ADDRESS>;
+
+    location / {
+        proxy_pass http://backend;
+    }
+}
+```
+#### 5.Configure Nginx on the Private Load Balancer
+```nginx
+upstream backend {
+    server <PRIVATE_IP_ADDRESS_1>;
+    server <PRIVATE_IP_ADDRESS_2>;
+    # add more backend servers as needed
+}
+
+server {
+    listen 80;
+    server_name <PRIVATE_LOAD_BALANCER_IP_ADDRESS>;
+
+    location / {
+        proxy_pass http://backend;
+    }
+}
+```
+#### 6. Configure Nginx on the Private EC2 Instance
+
+On the private EC2 instance in Private Subnet (Instance 5,6), run the following commands to display the local IPv4 address on a web page:
+
+```bash
+
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/local-ipv4 > /usr/share/nginx/html/index.html
+```
+#### 7.Overview of Private EC2 Instance
+
+![Private EC2 Instance](screenshots/Private-Instance-overview1.png)
+![Private EC2 Instance](screenshots/Private-Instance-overview2.png)
