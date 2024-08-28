@@ -101,7 +101,8 @@ server {
  ![Load Balancer Overview](screenshots/load-balancer-overview1.png)
  ![Load Balancer Overview](screenshots/load-balancer-overview2.png)
 
-##### Stage 2: Private EC2 Instances and Load Balancing
+
+## Stage 2: Private EC2 Instances and Load Balancing
 
 #### 1. Create Private Subnets
 
